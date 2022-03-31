@@ -30,12 +30,12 @@ class Body extends StatelessWidget {
     return Scaffold(
       body: Consumer<DetailProvider>(
         builder: (context, state, _) {
-          if (state.data == ResultData.hasData) {
+          if (state.data == ResultData.loading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state.data == ResultData.hasData) {
             return DetailBody(
               state: state,
             );
-          } else if (state.data == ResultData.loading) {
-            return Center(child: CircularProgressIndicator());
           } else if (state.data == ResultData.error) {
             return Align(
               alignment: Alignment.center,
