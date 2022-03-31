@@ -34,6 +34,8 @@ class Body extends StatelessWidget {
             return DetailBody(
               state: state,
             );
+          } else if (state.data == ResultData.loading) {
+            return Center(child: CircularProgressIndicator());
           } else if (state.data == ResultData.error) {
             return Align(
               alignment: Alignment.center,
@@ -55,11 +57,7 @@ class Body extends StatelessWidget {
               ),
             );
           } else {
-            return Column(
-              children: [
-                CircularProgressIndicator(),
-              ],
-            );
+            return Center(child: Container());
           }
         },
       ),
