@@ -15,8 +15,6 @@ import 'package:restaurant_app/screen/homepage.dart';
 import 'package:restaurant_app/screen/search_page.dart';
 import 'package:restaurant_app/screen/settings_page.dart';
 
-import 'package:restaurant_app/screen/splashscreen.dart';
-
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
@@ -38,7 +36,6 @@ Future<void> main() async {
           debugShowCheckedModeBanner: false,
           initialRoute: HomePage.routeName,
           routes: {
-            // SplashScreen.routeName: (context) => SplashScreen(),
             HomePage.routeName: (context) => HomePage(),
             DetailPage.routeName: (context) => DetailPage(
                   restaurant_id:
