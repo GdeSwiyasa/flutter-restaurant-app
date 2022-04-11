@@ -8,6 +8,7 @@ import 'package:restaurant_app/data/model/restaurant_model.dart';
 import 'package:restaurant_app/provider/detail_provider.dart';
 import 'package:restaurant_app/provider/favorite_provider.dart';
 import 'package:restaurant_app/widget/custom_menu.dart';
+import 'package:restaurant_app/widget/custom_snackbar.dart';
 
 class DetailPage extends StatelessWidget {
   static const routeName = '/detail_page';
@@ -95,12 +96,18 @@ class DetailBody extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          state.detailRestaurant.restaurant.name,
-                          style: GoogleFonts.poppins(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              state.detailRestaurant.restaurant.name,
+                              style: GoogleFonts.poppins(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            _favoriteList(context, state.detailRestaurant),
+                          ],
                         ),
                         Text(
                           state.detailRestaurant.restaurant.categories
@@ -124,7 +131,6 @@ class DetailBody extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
-                        _favoriteList(context, state.detailRestaurant),
                         const SizedBox(
                           height: 20,
                         ),
@@ -235,22 +241,31 @@ class DetailBody extends StatelessWidget {
     return Consumer(
       builder: (context, FavoriteProvider value, _) {
         return FutureBuilder<bool>(
-            future: value.isFavorite(restaurantList.restaurant),
-            builder: (context, snapshot) {
-              var favorite = snapshot.data ?? false;
-              return favorite
-                  ? IconButton(
-                      onPressed: () {
-                        value.removeFav(restaurantList.restaurant);
-                      },
-                      icon: const Icon(Icons.favorite))
-                  : IconButton(
-                      onPressed: () {
-                        value.addFavorite(restaurantList.restaurant);
-                      },
-                      icon: const Icon(Icons.favorite_border),
-                    );
-            });
+          future: value.isFavorite(restaurantList.restaurant),
+          builder: (context, snapshot) {
+            var favorite = snapshot.data ?? false;
+            return favorite
+                ? IconButton(
+                    onPressed: () {
+                      value.removeFav(restaurantList.restaurant);
+                      CustomSnackBar().error("Success to remove");
+                    },
+                    icon: Icon(
+                      Icons.favorite,
+                      color: CustomColor().fieryRose,
+                    ))
+                : IconButton(
+                    onPressed: () {
+                      value.addFavorite(restaurantList.restaurant);
+                      CustomSnackBar().success("Success to add favorite");
+                    },
+                    icon: Icon(
+                      Icons.favorite_border,
+                      color: CustomColor().fieryRose,
+                    ),
+                  );
+          },
+        );
       },
     );
   }
