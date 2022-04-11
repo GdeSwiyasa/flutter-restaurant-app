@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        initialRoute: HomePage.routeName,
+        initialRoute: SplashScreen.routeName,
         routes: {
-          // SplashScreen.routeName: (context) => SplashScreen(),s
+          SplashScreen.routeName: (context) => SplashScreen(),
           HomePage.routeName: (context) => HomePage(),
           DetailPage.routeName: (context) => DetailPage(
                 restaurant_id:
