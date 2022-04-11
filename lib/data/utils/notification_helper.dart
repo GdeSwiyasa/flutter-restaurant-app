@@ -5,7 +5,7 @@ import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/data/model/restaurant_model.dart';
 import 'package:rxdart/rxdart.dart';
 
-final selectNotificationSubject = BehaviorSubject<String>();
+final checkedNotificationSubject = BehaviorSubject<String>();
 
 class NotificationHelper {
   static NotificationHelper? _instance;
@@ -18,8 +18,7 @@ class NotificationHelper {
 
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+    var initializationSettingsAndroid = AndroidInitializationSettings('logo');
 
     var initializationSettingsIOS = IOSInitializationSettings(
       requestAlertPermission: false,
@@ -36,7 +35,7 @@ class NotificationHelper {
         // ignore: avoid_print
         print('notification payload: ' + payload);
       }
-      selectNotificationSubject.add(payload ?? 'empty payload');
+      checkedNotificationSubject.add(payload ?? 'empty payload');
     });
   }
 
@@ -69,7 +68,7 @@ class NotificationHelper {
   }
 
   void configureSelectNotificationSubject(String route) {
-    selectNotificationSubject.stream.listen(
+    checkedNotificationSubject.stream.listen(
       (String payload) async {
         var data = Restaurant.fromJson(json.decode(payload));
         var id_restaurant = data.id;
