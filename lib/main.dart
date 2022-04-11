@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/screen/detailpage.dart';
+import 'package:restaurant_app/screen/favorite_page.dart';
 import 'package:restaurant_app/screen/homepage.dart';
 import 'package:restaurant_app/screen/search_page.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
                   ModalRoute.of(context)?.settings.arguments as String,
             ),
         SearchPage.routeName: (context) => SearchPage(),
+        FavoritePage.routeName: (context) => FavoritePage(),
       },
     );
   }
