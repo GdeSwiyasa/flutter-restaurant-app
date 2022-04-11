@@ -19,51 +19,15 @@ class SearchPage extends StatelessWidget {
       create: (_) => SearchProvider(apiService: ApiService()),
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 200,
+          toolbarHeight: 100,
           title: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Your current address",
-                          style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          "Your Location Now",
-                          style: GoogleFonts.poppins(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.favorite_border_outlined,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.notifications_none_outlined,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-              ],
+            child: Text(
+              "Search Restaurant",
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           flexibleSpace: Container(
@@ -128,18 +92,13 @@ class Body extends StatelessWidget {
                   return Expanded(
                     child: ListView(
                       children: [
-                        Image.asset("assets/empty.png"),
-                        SizedBox(
-                          height: 10,
+                        Image.asset(
+                          "assets/empty.png",
+                          height: 250,
                         ),
-                        Text(
-                          "Search Restaurant",
-                          style: GoogleFonts.poppins(
-                            fontSize: 19,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          textAlign: TextAlign.center,
-                        )
+                        SizedBox(
+                          height: 50,
+                        ),
                       ],
                     ),
                   );
