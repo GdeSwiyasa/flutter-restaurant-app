@@ -18,9 +18,10 @@ class NotificationHelper {
 
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
-    var initializationSettingsAndroid = AndroidInitializationSettings('logo');
+    var initializationSettingsAndroid =
+        const AndroidInitializationSettings('logo');
 
-    var initializationSettingsIOS = IOSInitializationSettings(
+    var initializationSettingsIOS = const IOSInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
       requestSoundPermission: false,
@@ -52,9 +53,9 @@ class NotificationHelper {
         importance: Importance.max,
         priority: Priority.high,
         ticker: 'ticker',
-        styleInformation: DefaultStyleInformation(true, true));
+        styleInformation: const DefaultStyleInformation(true, true));
 
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);
@@ -71,8 +72,8 @@ class NotificationHelper {
     checkedNotificationSubject.stream.listen(
       (String payload) async {
         var data = Restaurant.fromJson(json.decode(payload));
-        var id_restaurant = data.id;
-        Navigation.intentWithData(route, id_restaurant);
+        var idRestaurant = data.id;
+        Navigation.intentWithData(route, idRestaurant);
       },
     );
   }
