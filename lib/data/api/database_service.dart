@@ -1,5 +1,6 @@
 import 'package:restaurant_app/data/model/detail_model.dart';
-import 'package:restaurant_app/data/model/favorit_model.dart';
+import 'package:restaurant_app/data/model/favorite_model.dart';
+
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseService {
