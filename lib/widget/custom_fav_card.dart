@@ -6,10 +6,10 @@ import 'package:restaurant_app/screen/detailpage.dart';
 
 import '../data/model/restaurant_model.dart';
 
-class CustomCard extends StatelessWidget {
+class CustomFavCard extends StatelessWidget {
   final RestaurantFavorit restaurant;
 
-  const CustomCard({Key? key, required this.restaurant}) : super(key: key);
+  const CustomFavCard({Key? key, required this.restaurant}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
