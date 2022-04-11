@@ -91,7 +91,7 @@ class _SettingPageState extends State<SettingPage> {
                     onChanged: (value) {
                       setState(
                         () {
-                          scheduled.scheduledRestaurantRecoment(value);
+                          scheduled.scheduledRestaurantRecommend(value);
                           scheduled.scheduledStatus;
                           onChanged(value);
                         },
