@@ -4,6 +4,7 @@ import 'package:restaurant_app/provider/favorite_provider.dart';
 import 'package:restaurant_app/widget/custom_fav_card.dart';
 
 class FavoritePage extends StatelessWidget {
+  static const routeName = '/favorit_page';
   const FavoritePage({Key? key}) : super(key: key);
 
   @override
