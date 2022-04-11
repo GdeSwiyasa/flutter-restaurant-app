@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/color.dart';
 import 'package:restaurant_app/provider/daily_alarm_provider.dart';
-import 'package:restaurant_app/screen/search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingPage extends StatefulWidget {
