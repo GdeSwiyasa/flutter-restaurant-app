@@ -29,9 +29,9 @@ class FavoriteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addFavorite(RestaurantDetail restautant) async {
+  void addFavorite(RestaurantDetail restaurant) async {
     try {
-      await databaseService.insertFavorit(restautant);
+      await databaseService.insertFavorite(restaurant);
       getFavorite();
     } catch (e) {
       _data = ResultState.error;
