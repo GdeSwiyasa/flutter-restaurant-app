@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app/provider/daily_alarm_provider.dart';
+import 'package:restaurant_app/screen/search_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingPage extends StatefulWidget {
@@ -41,6 +44,44 @@ class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ChangeNotifierProvider<SchedulingProvider>(
+      create: (context) => SchedulingProvider(),
+      child: Scaffold(
+        appBar: AppBar(title: Text("setting")),
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 20.0,
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
+            Material(
+              child: ListTile(
+                iconColor: Colors.black,
+                title: const Text('Push Notification'),
+                subtitle: const Text('Restaurant Recommendation'),
+                trailing: Consumer<SchedulingProvider>(
+                  builder: (context, scheduled, _) {
+                    return Switch(
+                      value: notification,
+                      onChanged: (bool value) {
+                        setState(
+                          () {
+                            scheduled.scheduledRestaurantRecoment(value);
+                            scheduled.scheduledStatus;
+                            onChanged(value);
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
