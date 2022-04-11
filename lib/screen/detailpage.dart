@@ -231,7 +231,7 @@ class DetailBody extends StatelessWidget {
     );
   }
 
-  Widget _favoriteList(BuildContext context, DetailRestaurant restaurantList) {
+  _favoriteList(BuildContext context, DetailRestaurant restaurantList) {
     return Consumer(
       builder: (context, FavoriteProvider value, _) {
         return FutureBuilder<bool>(
@@ -240,9 +240,14 @@ class DetailBody extends StatelessWidget {
               var favorite = snapshot.data ?? false;
               return favorite
                   ? IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.favorite))
+                      onPressed: () {
+                        value.removeFav(restaurantList.restaurant);
+                      },
+                      icon: const Icon(Icons.favorite))
                   : IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        value.addFavorite(restaurantList.restaurant);
+                      },
                       icon: const Icon(Icons.favorite_border),
                     );
             });
