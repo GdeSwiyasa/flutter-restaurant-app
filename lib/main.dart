@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/database_service.dart';
+import 'package:restaurant_app/data/utils/notification_helper.dart';
 import 'package:restaurant_app/provider/favorite_provider.dart';
 import 'package:restaurant_app/screen/detailpage.dart';
 import 'package:restaurant_app/screen/favorite_page.dart';
@@ -9,7 +11,13 @@ import 'package:restaurant_app/screen/search_page.dart';
 
 import 'package:restaurant_app/screen/splashscreen.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+
   runApp(MyApp());
 }
 
