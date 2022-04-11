@@ -8,14 +8,14 @@ class SchedulingProvider extends ChangeNotifier {
 
   bool get scheduledStatus => _scheduledStatus;
 
-  Future<bool> scheduledRestaurantRecoment(bool value) async {
+  Future<bool> scheduledRestaurantRecommend(bool value) async {
     _scheduledStatus = value;
     if (_scheduledStatus) {
       // ignore: avoid_print
-      print('Scheduling Restaurant Recommendation Active');
+      print('Scheduling Active');
       notifyListeners();
       return await AndroidAlarmManager.periodic(
-        Duration(hours: 24),
+        const Duration(hours: 24),
         1,
         BackgroundService.callback,
         startAt: DateTimeHelper.format(),
@@ -24,7 +24,7 @@ class SchedulingProvider extends ChangeNotifier {
       );
     } else {
       // ignore: avoid_print
-      print('Scheduling Restaurant Recommendation Deactivate');
+      print('Scheduling Deactivate');
       notifyListeners();
       return await AndroidAlarmManager.cancel(1);
     }
