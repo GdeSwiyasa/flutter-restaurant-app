@@ -27,6 +27,7 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
+    // ignore: avoid_print
     print('Alarm fired!');
     final NotificationHelper _notificationHelper = NotificationHelper();
     var result = await ApiService().getListRestaurant();
@@ -38,11 +39,8 @@ class BackgroundService {
       flutterLocalNotificationsPlugin,
       result.restaurants[randomIndex],
     );
+
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
     _uiSendPort?.send(null);
-  }
-
-  Future<void> someTask() async {
-    print('Updated data from the background isolate');
   }
 }
