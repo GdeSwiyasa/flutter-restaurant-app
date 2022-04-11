@@ -3,7 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/color.dart';
 import 'package:restaurant_app/data/api/api_provider.dart';
+import 'package:restaurant_app/data/model/detail_model.dart';
+import 'package:restaurant_app/data/model/restaurant_model.dart';
 import 'package:restaurant_app/provider/detail_provider.dart';
+import 'package:restaurant_app/provider/favorite_provider.dart';
 import 'package:restaurant_app/widget/custom_menu.dart';
 
 class DetailPage extends StatelessWidget {
@@ -17,7 +20,7 @@ class DetailPage extends StatelessWidget {
     return ChangeNotifierProvider<DetailProvider>(
       create: (_) =>
           DetailProvider(apiService: ApiService(), idRestaurant: restaurant_id),
-      child: Body(),
+      child: const Body(),
     );
   }
 }
@@ -31,7 +34,7 @@ class Body extends StatelessWidget {
       body: Consumer<DetailProvider>(
         builder: (context, state, _) {
           if (state.data == ResultData.loading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: const CircularProgressIndicator());
           } else if (state.data == ResultData.hasData) {
             return DetailBody(
               state: state,
@@ -42,7 +45,7 @@ class Body extends StatelessWidget {
               child: ListView(
                 children: [
                   Image.asset("assets/error.png"),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
@@ -121,6 +124,7 @@ class DetailBody extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                               color: Colors.black54),
                         ),
+                        _favoriteList(context, state.detailRestaurant),
                         const SizedBox(
                           height: 20,
                         ),
@@ -224,6 +228,25 @@ class DetailBody extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  Widget _favoriteList(BuildContext context, DetailRestaurant restaurantList) {
+    return Consumer(
+      builder: (context, FavoriteProvider value, _) {
+        return FutureBuilder<bool>(
+            future: value.isFavorite(restaurantList.restaurant),
+            builder: (context, snapshot) {
+              var favorite = snapshot.data ?? false;
+              return favorite
+                  ? IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.favorite))
+                  : IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.favorite_border),
+                    );
+            });
+      },
     );
   }
 }
