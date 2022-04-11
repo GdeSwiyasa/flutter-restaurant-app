@@ -16,12 +16,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    super.initState();
     Timer.periodic(const Duration(seconds: 5), (timer) {
       setState(() {
         activeIndex++;
 
         if (activeIndex == 4) activeIndex = 0;
+        super.initState();
       });
     });
   }
