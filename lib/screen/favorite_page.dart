@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/favorite_provider.dart';
+import 'package:restaurant_app/widget/custom_fav_card.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -23,12 +24,16 @@ class FavoritePage extends StatelessWidget {
                 return ListView.separated(
                     itemBuilder: (context, index) {
                       var restaurant = value.listFavorite[index];
-                      return;
+                      return CustomFavCard(restaurant: restaurant);
                     },
                     separatorBuilder: (context, index) => const SizedBox(
                           height: 24.0,
                         ),
                     itemCount: value.listFavorite.length);
+              } else {
+                return Center(
+                  child: Text("Ups"),
+                );
               }
             }),
           ))
