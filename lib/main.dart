@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/database_service.dart';
 import 'package:restaurant_app/data/utils/background_service.dart';
@@ -28,31 +29,27 @@ Future<void> main() async {
     await AndroidAlarmManager.initialize();
   }
   await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => FavoriteProvider(databaseService: DatabaseService()),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        initialRoute: HomePage.routeName,
-        routes: {
-          // SplashScreen.routeName: (context) => SplashScreen(),
-          HomePage.routeName: (context) => HomePage(),
-          DetailPage.routeName: (context) => DetailPage(
-                restaurant_id:
-                    ModalRoute.of(context)?.settings.arguments as String,
-              ),
-          SearchPage.routeName: (context) => SearchPage(),
-          FavoritePage.routeName: (context) => FavoritePage(),
-          SettingPage.routeName: (context) => SettingPage(),
-        },
+  runApp(
+    OverlaySupport.global(
+      child: ChangeNotifierProvider(
+        create: (_) => FavoriteProvider(databaseService: DatabaseService()),
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          initialRoute: HomePage.routeName,
+          routes: {
+            // SplashScreen.routeName: (context) => SplashScreen(),
+            HomePage.routeName: (context) => HomePage(),
+            DetailPage.routeName: (context) => DetailPage(
+                  restaurant_id:
+                      ModalRoute.of(context)?.settings.arguments as String,
+                ),
+            SearchPage.routeName: (context) => SearchPage(),
+            FavoritePage.routeName: (context) => FavoritePage(),
+            SettingPage.routeName: (context) => SettingPage(),
+          },
+        ),
       ),
-    );
-  }
+    ),
+  );
 }
