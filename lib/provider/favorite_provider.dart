@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/data/api/database_service.dart';
+import 'package:restaurant_app/data/model/detail_model.dart';
+import 'package:restaurant_app/data/model/favorite_model.dart';
 
 class FavoriteProvider extends ChangeNotifier {
   final DatabaseService databaseService;
