@@ -7,6 +7,7 @@ import 'package:restaurant_app/provider/restaurant_provider.dart';
 import 'package:restaurant_app/screen/detailpage.dart';
 import 'package:restaurant_app/screen/favorite_page.dart';
 import 'package:restaurant_app/screen/search_page.dart';
+import 'package:restaurant_app/screen/settings_page.dart';
 import 'package:restaurant_app/widget/custom_card.dart';
 
 import '../data/api/api_provider.dart';
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    selectNotificationSubject.close();
+    checkedNotificationSubject.close();
     // didReceiveLocalNotificationSubject.close();
     super.dispose();
   }
@@ -74,6 +75,14 @@ class _HomePageState extends State<HomePage> {
                     },
                     icon: Icon(
                       Icons.search,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, SettingPage.routeName);
+                    },
+                    icon: Icon(
+                      Icons.settings,
                     ),
                   ),
                   IconButton(
