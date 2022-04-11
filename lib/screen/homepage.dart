@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/color.dart';
+import 'package:restaurant_app/data/utils/notification_helper.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/screen/detailpage.dart';
 import 'package:restaurant_app/screen/favorite_page.dart';
 import 'package:restaurant_app/screen/search_page.dart';
 import 'package:restaurant_app/widget/custom_card.dart';
@@ -17,6 +19,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final NotificationHelper _notificationHelper = NotificationHelper();
+
+  @override
+  void initState() {
+    super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(DetailPage.routeName);
+    //  _notificationHelper.configureDidReceiveLocalNotificationSubject(
+    //      context, DetailPage.routeName);
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    // didReceiveLocalNotificationSubject.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
