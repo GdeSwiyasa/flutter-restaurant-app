@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:restaurant_app/common/navigation.dart';
 import 'package:restaurant_app/data/model/restaurant_model.dart';
 import 'package:rxdart/rxdart.dart';
 
-final checkedNotificationSubject = BehaviorSubject<String>();
+final selectNotificationSubject = BehaviorSubject<String>();
 
 class NotificationHelper {
   static NotificationHelper? _instance;
@@ -35,7 +36,7 @@ class NotificationHelper {
         // ignore: avoid_print
         print('notification payload: ' + payload);
       }
-      checkedNotificationSubject.add(payload ?? 'empty payload');
+      selectNotificationSubject.add(payload ?? 'empty payload');
     });
   }
 
@@ -67,13 +68,13 @@ class NotificationHelper {
         payload: json.encode(restaurants.toJson()));
   }
 
-  // void configureSelectNotificationSubject(String route) {
-  //   checkedNotificationSubject.stream.listen(
-  //     (String payload) async {
-  //       var data = Restaurant.fromJson(json.decode(payload));
-  //       var id_restaurant = data.id;
-  //       Navigation.intentWithData(route, id_restaurant);
-  //     },
-  //   );
-  // }
+  void configureSelectNotificationSubject(String route) {
+    selectNotificationSubject.stream.listen(
+      (String payload) async {
+        var data = Restaurant.fromJson(json.decode(payload));
+        var id_restaurant = data.id;
+        Navigation.intentWithData(route, id_restaurant);
+      },
+    );
+  }
 }
