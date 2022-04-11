@@ -3,13 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/common/color.dart';
 import 'package:restaurant_app/provider/restaurant_provider.dart';
+import 'package:restaurant_app/screen/favorite_page.dart';
 import 'package:restaurant_app/screen/search_page.dart';
 import 'package:restaurant_app/widget/custom_card.dart';
 
 import '../data/api/api_provider.dart';
 
 class HomePage extends StatelessWidget {
-  static const routeName = '/homepage';
+  static const routeName = '/';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +51,9 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, FavoritePage.routeName);
+                    },
                     icon: Icon(
                       Icons.notifications_none_outlined,
                     ),
@@ -138,7 +141,7 @@ class HomePage extends StatelessWidget {
     return Consumer<RestaurantProvider>(
       builder: (context, state, _) {
         if (state.data == ResultData.loading) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         } else if (state.data == ResultData.hasData) {
           return Expanded(
             child: ListView.separated(
