@@ -13,16 +13,14 @@ class DatabaseService {
 
   factory DatabaseService() => _instance ?? DatabaseService._internal();
 
-  static const String _favoritList = 'favorit';
-
-  // Future<Database?> get database async => _database ??= await _initializeDb();
+  static const String _favoriteList = 'favorite';
 
   Future<Database> _initializeDb() async {
     var path = await getDatabasesPath();
     var db = openDatabase(
-      "$path/restoranapp.db",
+      "$path/restaurantapp.db",
       onCreate: (db, version) async {
-        await db.execute('''CREATE TABLE $_favoritList (
+        await db.execute('''CREATE TABLE $_favoriteList (
              id TEXT PRIMARY KEY,
              name TEXT,
              city TEXT,
@@ -42,7 +40,7 @@ class DatabaseService {
     return _database;
   }
 
-  Future<void> insertFavorit(RestaurantDetail restaurant) async {
+  Future<void> insertFavorite(RestaurantDetail restaurant) async {
     final db = await database;
     var value = {
       'id': restaurant.id,
@@ -52,12 +50,12 @@ class DatabaseService {
       'pictureId': restaurant.pictureId,
       'rating': restaurant.rating.toString(),
     };
-    await db!.insert(_favoritList, value);
+    await db!.insert(_favoriteList, value);
   }
 
   Future<List<RestaurantFavorit>> getFavorite() async {
     final db = await database;
-    List<Map<String, dynamic>> results = await db!.query(_favoritList);
+    List<Map<String, dynamic>> results = await db!.query(_favoriteList);
 
     return results.map((e) => RestaurantFavorit.fromDb(e)).toList();
   }
@@ -66,7 +64,7 @@ class DatabaseService {
     final db = await database;
 
     List<Map<String, dynamic>> results =
-        await db!.query(_favoritList, where: 'id = ?', whereArgs: [id]);
+        await db!.query(_favoriteList, where: 'id = ?', whereArgs: [id]);
 
     if (results.isNotEmpty) {
       return results.first;
@@ -78,6 +76,6 @@ class DatabaseService {
   Future<void> removeFavorite(String id) async {
     final db = await database;
 
-    await db!.delete(_favoritList, where: 'id = ?', whereArgs: [id]);
+    await db!.delete(_favoriteList, where: 'id = ?', whereArgs: [id]);
   }
 }
