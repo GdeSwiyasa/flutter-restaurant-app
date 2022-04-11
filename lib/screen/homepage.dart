@@ -79,18 +79,18 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, SettingPage.routeName);
+                      Navigator.pushNamed(context, FavoritePage.routeName);
                     },
                     icon: Icon(
-                      Icons.settings,
+                      Icons.favorite_border,
                     ),
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, FavoritePage.routeName);
+                      Navigator.pushNamed(context, SettingPage.routeName);
                     },
                     icon: Icon(
-                      Icons.notifications_none_outlined,
+                      Icons.settings,
                     ),
                   ),
                 ],
