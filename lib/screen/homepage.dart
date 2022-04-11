@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 200,
+        toolbarHeight: 100,
         title: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
