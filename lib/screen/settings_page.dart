@@ -37,12 +37,6 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    load();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SchedulingProvider>(
       create: (context) => SchedulingProvider(),
